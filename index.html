@@ -1,0 +1,267 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browser Night #0 by browseRus, a community event for browser developers in Seoul, May 29, 2025.">
+    <title>Browser Night 2025 - browseRus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #E9ECEF; /* Light gray background */
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%; /* Flexible width for smaller screens */
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background: #4688F4; /* Light blue header */
+            color: #fff;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 5px 0;
+            font-size: 1.2em;
+        }
+        .header p.italic {
+            font-style: italic; /* Italic style for "Opening the Browser, Together" */
+        }
+        .content {
+            padding: 20px;
+        }
+        .content h2 {
+            color: #4688F4; /* Light blue headings */
+            margin-top: 20px;
+            font-size: 1.8em;
+            display: inline-block;
+        }
+        .content p, .content li {
+            font-size: 1.1em;
+        }
+        .content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background: #4688F4; /* Blue button, matching header */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background 0.3s ease; /* Smooth hover transition */
+        }
+        .cta-button:hover {
+            background: #3b78e7; /* Darker blue hover */
+        }
+        .flavor-button {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-left: 10px;
+            background: #DB4437; /* Red background for "Spicy" */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 0.9em;
+            vertical-align: middle;
+            transition: background 0.3s ease;
+        }
+        .flavor-button:hover {
+            background: #B31412; /* Darker red hover */
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            color: #A9B0B8; /* Gray footer */
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+                margin: 10px auto;
+            }
+            .header {
+                padding: 15px 0;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .header p {
+                font-size: 1em;
+            }
+            .content {
+                padding: 15px;
+            }
+            .content h2 {
+                font-size: 1.5em;
+            }
+            .content p, .content li {
+                font-size: 1em;
+            }
+            .cta-button {
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+            .flavor-button {
+                padding: 4px 8px;
+                font-size: 0.8em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+                margin: 5px auto;
+            }
+            .header {
+                padding: 10px 0;
+            }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .header p {
+                font-size: 0.9em;
+            }
+            .content {
+                padding: 10px;
+            }
+            .content h2 {
+                font-size: 1.3em;
+            }
+            .content p, .content li {
+                font-size: 0.9em;
+            }
+            .cta-button {
+                padding: 6px 12px;
+                font-size: 0.9em;
+                width: 100%; /* Full-width buttons on mobile */
+                text-align: center;
+            }
+            .flavor-button {
+                padding: 3px 6px;
+                font-size: 0.7em;
+                margin-left: 5px;
+            }
+            .footer {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Browser Night #0</h1>
+            <p class="italic">Opening the Browser, Together!</p>
+            <p>Hosted by browseRus</p>
+        </div>
+        <div class="content">
+            <h2>Browser Night #0 초대장</h2>
+            <a href="tabasco.html" class="flavor-button">매운맛 버전으로 전환하기</a>
+            <p>browseRus가 2025년 첫 번째 이벤트 <strong>Browser Night #0</strong>를 개최합니다! 웹 브라우저 개발에 관심 있는 모든 분들을 초대하여 기술, 경험, 그리고 네트워킹의 장을 마련했어요.</p>
+            <p>browseRus는 한국을 중심으로 브라우저 개발자들의 자발적인 커뮤니티입니다. 브라우저 개발의 최신 트렌드를 공유하고, 서로의 경험을 나누며, 새로운 인연을 만들어보세요. 이번 행사는 browseRus의 시작을 알리는 자리로, 기술적인 이야기 보다는 커뮤니티의 비전과 앞으로의 활동을 소개합니다.</p>
+            <p>특별히, 이번 행사에서는 라이트닝 토크와 *약간의 알콜을* 가미한 주제별 네트워킹 시간을 통해 참가자 모두가 적극적으로 교류할 수 있는 기회를 제공합니다. 편안한 분위기에서 음식과 음료를 즐기며 브라우저 개발의 열정을 나누는 시간이 될 거예요.</p>
+            <p>브라우저 개발자가 아니어도 누구나 참여 가능하니, 많은 관심과 참여 부탁드립니다!</p>
+            
+            <h2>행사 정보</h2>
+            <ul>
+                <li><strong>일시:</strong> 2025년 5월 29일(목), 오후 7:00</li>
+                <li><strong>장소:</strong> 오픈업, 서울 서초구 서초대로40길 83</li>
+                <li><strong>티켓:</strong> 25,000원</li>
+                <li><strong>마감:</strong> 2025년 5월 15일 (행사 2주 전) / 현장 판매 없음 (No Walk-In) / 음식 & 음료 제공</li>
+                <li><strong>문의:</strong> <a href="mailto:org.browserus@gmail.com">org.browserus@gmail.com</a></li>
+            </ul>
+            <p>*본 모임은 비상업적 커뮤니티 이벤트로, 티켓 수익은 전액 행사 진행(음식, 음료, 경품 등)에 사용됩니다*</p>
+            
+            <h2>Agenda</h2>
+            <ul>
+                <li><strong>06:30 PM:</strong> 입장, 음식 & 음료, 네트워킹</li>
+                <li><strong>07:00 PM:</strong> 오프닝 & browseRus 소개</li>
+                <li><strong>07:10 PM:</strong> 라이트닝 토크</li>
+                <li><strong>08:00 PM:</strong> 주제별 네트워킹</li>
+                <li><strong>10:00 PM:</strong> 마무리</li>
+            </ul>
+            <p>* 진행 시간과 프로그램은 사전 고지 없이 변경될 수 있습니다.</p>
+            
+            <h2>라이트닝 토크 발표자 모집</h2>
+            <p><strong>Browser Night #0의 라이트닝 토크에서 당신의 이야기를 들려주세요!</strong><br>
+            이번 라이트닝 토크는 브라우저 개발의 딥한 기술 이야기가 아니어도 OK! 브라우저와 관련된 가벼운 경험, 재미있는 에피소드, 혹은 최근 근황들을 5분 이내로 공유해보세요. 발표 자료? 없어도 괜찮아요. 부담 없이, 누구나 무대에 설 수 있는 자리입니다!</p>
+            <p><strong>왜 해야 하나요?</strong><br>
+            이건 단순한 발표가 아니에요. 당신의 5분이 커뮤니티를 뜨겁게 만들고, 새로운 연결을 만들어낼 기회입니다. 라이트닝 토크를 놓친다면, Browser Night #0의 하이라이트를 놓치는 거예요. 후회하지 말고 지금 지원하세요!</p>
+            <p><strong>특별한 선물</strong><br>
+            라이트닝 토크 발표자들에게는 LGTM 실물 도장(미정) 같은 깜찍하고 어썸한 browseRus 굿즈가 준비되어 있어요! 이 특별한 무대에 올라 굿즈와 함께 Browser Night의 주인공이 되어보세요.</p>
+            <p><strong>지원 방법</strong><br>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdQXEIzIon43Z5JPTSt7hjjDSspXA9G1st_RfW6IoV5bLDISQ/viewform?usp=header">등록 하러 가기</a> 페이지에서 라이트닝 토크 주제와 간단한 개요(200자 이내)를 작성해주세요. 선정된 발표자는 5월 12일까지 개별적으로 연락드립니다.</p>
+            <p><strong>마감</strong><br>
+            2025년 5월 10일(토) 자정까지. 놓치면 후회할 기회입니다!</p>
+            
+            <h2>지금 등록 하세요!</h2>
+            <p>브라우저 개발의 미래를 함께 열어갈 당신을 기다립니다. 자리는 한정되어 있으니 서둘러 등록해주세요!</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdQXEIzIon43Z5JPTSt7hjjDSspXA9G1st_RfW6IoV5bLDISQ/viewform?usp=header" class="cta-button">등록 하러 가기</a>
+        </div>
+        <div class="footer">
+            <p>browseRus | 문의: <a href="mailto:org.browserus@gmail.com">org.browserus@gmail.com</a></p>
+        </div>
+    </div>
+</body>
+</html>
