@@ -113,8 +113,83 @@
         /* Italic style for "Opening the Browser, Together" */
         font-style: italic;
         font-size: 1.2em;
-        line-height: 0.8;
       }
+
+    .promo-section {
+      background-color: #4c1d95; /* bg-indigo-900 */
+      padding: 2rem 0; /* py-8 */
+      color: white; /* text-white */
+    }
+    
+    .promo-container {
+      max-width: 80rem; /* max-w-7xl */
+      margin: 0 auto; /* mx-auto */
+      padding: 0 1rem; /* px-4 */
+    }
+    
+    @media (min-width: 640px) {
+      .promo-container {
+        padding: 0 1.5rem; /* sm:px-6 */
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .promo-container {
+        padding: 0 2rem; /* lg:px-8 */
+      }
+    }
+    
+    .promo-content {
+      display: flex;
+      flex-direction: column; /* flex-col */
+      align-items: center; /* items-center */
+      justify-content: center; /* justify-center */
+      gap: 2rem; /* gap-8 */
+      text-align: center; /* text-center */
+    }
+    
+    @media (min-width: 768px) {
+      .promo-content {
+        flex-direction: row; /* md:flex-row */
+        text-align: left; /* md:text-left */
+      }
+    }
+    
+    .promo-item {
+      display: flex; /* flex */
+      align-items: center; /* items-center */
+      gap: 0.75rem; /* gap-3 */
+    }
+    
+    .promo-operator {
+      display: none; /* hidden */
+      font-size: 2.25rem; /* text-4xl */
+      font-weight: bold; /* font-bold */
+    }
+    
+    @media (min-width: 768px) {
+      .promo-operator {
+        display: block; /* md:block */
+      }
+    }
+    
+    .promo-text {
+      font-size: 1.5rem; /* text-2xl */
+      font-weight: bold; /* font-bold */
+    }
+    
+    .promo-result {
+      font-size: 1.5rem; /* text-2xl */
+      font-weight: bold; /* font-bold */
+    }
+    
+    .beer-icon {
+      color: #fbbf24; /* text-amber-400 */
+    }
+    
+    .pizza-icon {
+      color: #f87171; /* text-red-400 */
+    }
 
       .event-section {
         padding: 4.25rem 1rem;
@@ -330,7 +405,10 @@
       <img class="logo" src="./logo.svg" alt="browseRus Logo" />
       <div class="header">
         <h1 class="title">Browser Night <span class="v0">#{0}</span></h1>
-        <p class="italic">Opening the Browser, Together!</p>
+        <p class="italic">
+            Opening the Browser, Together! <br />
+            Grab some 🍕 pizza, drink some 🍺 beer, and talk code!
+        </p>
         <p>Hosted by browseRus</p>
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLSdQXEIzIon43Z5JPTSt7hjjDSspXA9G1st_RfW6IoV5bLDISQ/viewform?usp=header"
@@ -338,7 +416,39 @@
           >등록 하러 가기</a
         >
       </div>
+    </div>
 
+      <section class="promo-section">
+      <div class="promo-container">
+        <div class="promo-content">
+          <div class="promo-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="beer-icon">
+              <path d="M17 11h1a3 3 0 0 1 0 6h-1"></path>
+              <path d="M9 12v6"></path>
+              <path d="M13 12v6"></path>
+              <path d="M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5S9.44 2 11 2s2 1.5 3 1.5 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5Z"></path>
+              <path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8"></path>
+            </svg>
+            <span class="promo-text">Beer</span>
+          </div>
+          <div class="promo-operator">+</div>
+          <div class="promo-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pizza-icon">
+              <path d="M15 11h.01"></path>
+              <path d="M11 15h.01"></path>
+              <path d="M16 16h.01"></path>
+              <path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"></path>
+              <path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"></path>
+            </svg>
+            <span class="promo-text">Pizza</span>
+          </div>
+          <div class="promo-operator">=</div>
+          <div class="promo-result">Good Times!</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
       <section class="event-section">
         <div class="event-grid">
           <div class="event-card">
