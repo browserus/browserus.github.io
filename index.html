@@ -213,6 +213,7 @@
         align-items: flex-start;
         gap: 1rem;
         transition: transform 0.2s;
+        justify-content: center;
       }
 
       .event-card:hover {
@@ -235,13 +236,20 @@
         display: inline;
       }
 
+      .event-card-content {
+        width:120px;
+      }
+
       .event-text {
+        text-align: center;
+        font-weight:600;
         color: white;
       }
 
       .event-subtext {
         color: #94a3b8;
         font-size: 1rem;
+        text-align: center;
       }
 
       .content {
@@ -404,7 +412,7 @@
     <div class="container">
       <img class="logo" src="./logo.svg" alt="browseRus Logo" />
       <div class="header">
-        <h1 class="title">Browser Night <span class="v0">#{0}</span></h1>
+        <h1 class="title">Browser Night <span class="v0">#1</span></h1>
         <p class="italic">
             Opening the Browser, Together! <br />
             Grab some 🍕 pizza, drink some 🍺 beer, and talk code!
@@ -452,18 +460,25 @@
       <section class="event-section">
         <div class="event-grid">
           <div class="event-card">
-            <div>
+            <div class="event-card-content">
               <div class="event-header">
                 <span class="material-symbols-outlined"> calendar_today </span>
                 <h2 class="event-title">When</h2>
               </div>
               <p class="event-text">2025. 5. 29. (목)</p>
-              <p class="event-subtext">캘박필수!</p>
+              <p class="event-subtext">
+                  <a rel="noopener"
+                      target="_blank"
+                      href="https://www.google.com/calendar/render?action=TEMPLATE&text=Browser+Night%231&location=%EC%84%9C%EC%9A%B8+%EC%84%9C%EC%B4%88%EA%B5%AC+%EC%84%9C%EC%B4%88%EB%8C%80%EB%A1%9C40%EA%B8%B8+83&dates=20250529T100000Z%2F20250529T133000Z"
+                    >
+                      캘박하기!
+                  </a>
+              </p>
             </div>
           </div>
 
           <div class="event-card">
-            <div>
+            <div class="event-card-content">
               <div class="event-header">
                 <span class="material-symbols-outlined"> schedule </span>
                 <h2 class="event-title">Time</h2>
@@ -474,46 +489,45 @@
           </div>
 
           <div class="event-card">
-            <div>
+            <div class="event-card-content">
               <div class="event-header">
                 <span class="material-symbols-outlined"> location_on </span>
                 <h2 class="event-title">Where</h2>
               </div>
               <p class="event-text">오픈업</p>
-              <p class="event-subtext">서울 서초구 서초대로40길 83</p>
+              <p class="event-subtext">서울 서초구<br/> 서초대로40길 83</p>
             </div>
           </div>
 
           <div class="event-card">
-            <div>
+            <div class="event-card-content">
               <div class="event-header">
                 <span class="material-symbols-outlined"> group </span>
                 <h2 class="event-title">Who</h2>
               </div>
-              <p class="event-text">Browser 개발자 & 친구들</p>
-              <p class="event-subtext">관심있는 사람은 누구나!</p>
+              <p class="event-text">Browser 개발자<br/></p>
+              <p class="event-subtext">관심있는 사람은<br/> 누구나!</p>
             </div>
           </div>
         </div>
       </section>
 
       <div class="content">
-        <h2>Browser Night <span class="v0">#{0}</span> 초대장 💌</h2>
+        <h2>Browser Night <span class="v0">#1</span> 초대장 💌</h2>
         <p>
           <strong>browseRus</strong>가 2025년 첫 번째 이벤트
-          <strong>Browser Night <span class="v0">#{0}</span></strong
-          >를 개최합니다! 웹 브라우저 개발에 관심 있는 모든 분들을 초대하여
+          <strong>Browser Night <span class="v0">#1</span></strong
+          >를 개최합니다!<br/> 웹 브라우저 개발에 관심 있는 모든 분들을 초대하여
           기술, 경험, 그리고 네트워킹의 장을 마련했어요.
         </p>
         <p>
-          <strong>browseRus</strong>는 한국을 중심으로 브라우저 개발자들의 자발적인
+          <strong>browseRus</strong>는 한국 브라우저 개발자들의 자발적인
           커뮤니티입니다. 브라우저 개발의 최신 트렌드를 공유하고, 서로의 경험을
           나누며, 새로운 인연을 만들어보세요. 이번 행사는 <strong>browseRus</strong>의 시작을
-          알리는 자리로, 기술적인 이야기 보다는 커뮤니티의 비전과 앞으로의
-          활동을 소개합니다.
+          알리는 자리로, 기술적인 이야기 약간과 커뮤니티가 앞으로의 활동을 함께 나눕니다
         </p>
         <p>
-          특별히, 이번 행사에서는 라이트닝 토크와 <strong>*약간의 알콜을</strong>* 가미한 주제별
+          이번 행사에서는 라이트닝 토크와 <strong>*약간의 알콜을</strong>* 가미한 주제별
           네트워킹 시간을 통해 참가자 모두가 적극적으로 교류할 수 있는 기회를
           제공합니다. 편안한 분위기에서 음식과 음료를 즐기며 브라우저 개발의
           열정을 나누는 시간이 될 거예요.
@@ -525,9 +539,14 @@
 
         <h2>행사 정보 📅</h2>
         <ul>
-          <li><strong>일시 :</strong> 2025년 5월 29일(목), 오후 7:00</li>
+          <li><strong>일시 :</strong>
+            <a
+              rel="noopener"
+              target="_blank"
+              href="https://www.google.com/calendar/render?action=TEMPLATE&text=Browser+Night%231&location=%EC%84%9C%EC%9A%B8+%EC%84%9C%EC%B4%88%EA%B5%AC+%EC%84%9C%EC%B4%88%EB%8C%80%EB%A1%9C40%EA%B8%B8+83&dates=20250529T100000Z%2F20250529T133000Z"
+            >2025년 5월 29일(목), 오후 7:00</a></li>
           <li><strong>장소 :</strong> 오픈업, 서울 서초구 서초대로40길 83</li>
-          <li><strong>티켓 :</strong> 25,000원</li>
+          <li><strong>티켓 :</strong> 24,900원 (정가, 후원 티켓 있음)</li>
           <li><strong>마감 :</strong> 2025년 5월 15일 (행사 2주 전) / 현장 판매 없음 (No Walk-In) / 음식 & 음료 제공 </li>
           <li><strong>문의 :</strong> <a href="mailto:org.browserus@gmail.com">org.browserus@gmail.com</a> </li>
         </ul>
@@ -548,7 +567,7 @@
 
         <h2>라이트닝 토크 발표자 모집 ⚡</h2>
         <p>
-          <h3>Browser Night <span class="v0">#{0}</span>의 라이트닝 토크에서 당신의 이야기를 들려주세요!</h3>
+          <h3>Browser Night <span class="v0">#1</span>의 라이트닝 토크에서 당신의 이야기를 들려주세요!</h3>
           이번 라이트닝 토크는 브라우저 개발의 딥한 기술 이야기가 아니어도 OK!
           브라우저와 관련된 가벼운 경험, 재미있는 에피소드, 혹은 최근 근황들을
           5분 이내로 공유해보세요. 발표 자료? 없어도 괜찮아요. 부담 없이, 누구나
